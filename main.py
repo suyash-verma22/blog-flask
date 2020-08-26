@@ -14,6 +14,19 @@ db = SQLAlchemy(app)
 def print_hi(name,id):
     return "Hello, " + name + " Welcome " + "id: " + str(id); 
 
+class BlogPosts(db_Model):
+    id = db.Column(db.Integer,primary_key = True)
+    title = db.Column(db.string(100),nullable=False)
+    content = db.Column(db.Text,nullable = False)
+    author = db.Column(db.string(20),nullable = False, default = 'N/A')
+    date_of_post = db.Column(db.datetime,nullable = False, default =datetime.utcnow)
+
+    def __repr__(self):
+        return "Blog post id: " + str(self.id)
+if __name__ == '__main__':
+    print('Suyash verma')
+    app.run(debug = True)
+
 """all_posts = [
     {
     'title': 'Post 1',
@@ -24,14 +37,11 @@ def print_hi(name,id):
     'title': 'Post 2',
     'content': 'This is my content of post 2',
     }
-]"""
+]
 
 # localhost:5000/posts will work
 @app.route('/posts')
 def show_posts():
     return render_template('posts.html',posts = all_posts)
-
-if __name__ == '__main__':
-    print('Suyash verma')
-    app.run(debug = True)
+"""
 
